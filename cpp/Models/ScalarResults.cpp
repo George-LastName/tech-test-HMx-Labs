@@ -36,22 +36,56 @@ void ScalarResults::addError(const std::string& tradeId, const std::string& erro
     errors_[tradeId] = error;
 }
 
+ScalarResults::Iterator::Iterator(ScalarResults::Iterator::result_it res_start,
+                                  ScalarResults::Iterator::result_it res_finish,
+                                  ScalarResults::Iterator::error_it  err_start,
+                                  ScalarResults::Iterator::error_it  err_finish)
+                            : results_begin_(res_start), results_end_(res_finish),
+                              errors_begin_(err_start), errors_end_(err_finish){
+
+}
+
+
 ScalarResults::Iterator& ScalarResults::Iterator::operator++() {
-    throw std::runtime_error("Iterator not implemented");
+    if (results_begin_ != results_end_){
+        ++results_begin_;
+    } else if (errors_begin_ != errors_end_){
+        ++errors_begin_;
+    } else {
+        throw std::runtime_error("Iterator::operator++() end of both maps");
+    }
+    return *this;
 }
 
 ScalarResult ScalarResults::Iterator::operator*() const {
-    throw std::runtime_error("Iterator not implemented");
+    std::optional<double> priceResult = std::nullopt;
+    std::optional<std::string> error = std::nullopt;
+    std::string tradeId;
+
+
+    if (results_begin_ != results_end_) {
+        tradeId = results_begin_->first;
+        priceResult = results_begin_->second;
+    } else if (errors_begin_ != errors_end_) {
+        tradeId = errors_begin_->first;
+        error= errors_begin_->second;
+    } else {
+        throw std::runtime_error("Iterator::operator*() end of both maps");
+    }
+
+    return ScalarResult(tradeId, priceResult, error);
 }
 
 bool ScalarResults::Iterator::operator!=(const Iterator& other) const {
-    throw std::runtime_error("Iterator not implemented");
+    return !(results_begin_ == other.results_begin_ && errors_begin_ == other.errors_begin_);
 }
 
 ScalarResults::Iterator ScalarResults::begin() const {
-    throw std::runtime_error("Not implemented");
+    return ScalarResults::Iterator(results_.begin(), results_.end(),
+                                   errors_.begin(), errors_.end());
 }
 
 ScalarResults::Iterator ScalarResults::end() const {
-    throw std::runtime_error("Not implemented");
+    return ScalarResults::Iterator(results_.end(), results_.end(),
+                                   errors_.end(), errors_.end());
 }

@@ -28,12 +28,21 @@ public:
         using pointer = ScalarResult*;
         using reference = ScalarResult&;
 
+        using result_it = std::map<std::string, double>::const_iterator;
+        using error_it = std::map<std::string, std::string>::const_iterator;
+
         Iterator() = default;
+        Iterator(result_it res_start, result_it res_finish, error_it err_start, error_it err_finish);
 
         // Iterator must be constructable from ScalarResults parent
         Iterator& operator++();
         ScalarResult operator*() const;
         bool operator!=(const Iterator& other) const;
+    private:
+        result_it results_begin_;
+        result_it results_end_;
+        error_it  errors_begin_;
+        error_it  errors_end_;
     };
 
     Iterator begin() const;
