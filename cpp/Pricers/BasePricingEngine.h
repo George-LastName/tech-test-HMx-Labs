@@ -9,22 +9,6 @@
 #include <random>
 
 class BasePricingEngine : public IPricingEngine {
-protected:
-    BasePricingEngine();
-    virtual ~BasePricingEngine() = default;
-    
-    void price(ITrade* trade, IScalarResultReceiver* resultReceiver) override;
-    
-public:
-    bool isTradeTypeSupported(const std::string& tradeType) const;
-    
-protected:
-    void addSupportedTradeType(const std::string& tradeType);
-    int getDelay() const;
-    void setDelay(int delay);
-    virtual void priceTrade(ITrade* trade, IScalarResultReceiver* resultReceiver);
-    virtual double calculateResult();
-    
 private:
     std::map<std::string, unsigned int> supportedTypes_;
     int delay_;
@@ -43,6 +27,21 @@ private:
     
     static std::map<std::string, std::string>& getTradesToError();
     static std::map<std::string, std::string>& getTradesToWarn();
+
+protected:
+    BasePricingEngine();
+    virtual ~BasePricingEngine() = default;
+
+    void price(ITrade* trade, IScalarResultReceiver* resultReceiver) override;
+    void addSupportedTradeType(const std::string& tradeType);
+    int getDelay() const;
+    void setDelay(int delay);
+    virtual void priceTrade(ITrade* trade, IScalarResultReceiver* resultReceiver);
+    virtual double calculateResult();
+
+public:
+    bool isTradeTypeSupported(const std::string& tradeType) const;
+
 };
 
 #endif // BASEPRICINGENGINE_H
