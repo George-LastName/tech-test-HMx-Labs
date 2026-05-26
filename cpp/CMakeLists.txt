@@ -4,6 +4,16 @@ project(TechTest)
 # Default to C++17, but candidates may change to 20 or 23 if preferred
 set(CMAKE_CXX_STANDARD 20)
 
+# XML Parser
+# include (FetchContent)
+#
+# FetchContent_Declare(pugixml
+#     GIT_REPOSITORY git@github.com:zeux/pugixml.git
+#     GIT_TAG v1.15
+# )
+# FetchContent_MakeAvailable(pugixml)
+
+
 # Models library
 # Make Models a static library so translation-unit implementations
 # (e.g. ScalarResults.cpp) are compiled and linked.
@@ -57,7 +67,11 @@ add_library(RiskSystem
 )
 
 target_include_directories(RiskSystem PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
-target_link_libraries(RiskSystem Models Loaders Pricers)
+target_link_libraries(RiskSystem Models Loaders Pricers #[[pugixml]])
+
+# XML parser for Exercise 3
+find_package(pugixml REQUIRED)
+target_link_libraries(RiskSystem pugixml::pugixml)
 
 # Find and link threading library (required for Exercise 8)
 find_package(Threads REQUIRED)
