@@ -34,7 +34,7 @@ BondTrade* BondTradeLoader::createTradeFromLine(std::string line) {
     return trade;
 }
 
-void BondTradeLoader::loadTradesFromFile(std::string filename, BondTradeList& tradeList) {
+void BondTradeLoader::loadTradesFromFile(std::string filename, TradeList& tradeList) {
     if (filename.empty()) {
         throw std::invalid_argument("Filename cannot be null");
     }
@@ -53,23 +53,4 @@ void BondTradeLoader::loadTradesFromFile(std::string filename, BondTradeList& tr
         }
         lineCount++;
     }
-}
-
-std::vector<ITrade*> BondTradeLoader::loadTrades() {
-    BondTradeList tradeList;
-    loadTradesFromFile(dataFile_, tradeList);
-    
-    std::vector<ITrade*> result;
-    for (size_t i = 0; i < tradeList.size(); ++i) {
-        result.push_back(tradeList[i]);
-    }
-    return result;
-}
-
-std::string BondTradeLoader::getDataFile() const {
-    return dataFile_;
-}
-
-void BondTradeLoader::setDataFile(const std::string& file) {
-    dataFile_ = file;
 }

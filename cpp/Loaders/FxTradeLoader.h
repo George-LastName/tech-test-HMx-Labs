@@ -3,18 +3,16 @@
 
 #include "ITradeLoader.h"
 #include "../Models/FxTrade.h"
+#include "../Models/TradeList.h"
 #include <string>
 #include <vector>
 
 class FxTradeLoader : public ITradeLoader {
 private:
-    std::string dataFile_;
+    static constexpr std::string separator_ = "¬";
     
-public:
-    // NOTE: These methods are only here to allow the solution to compile prior to the test being completed.
-    std::vector<ITrade*> loadTrades() override;
-    std::string getDataFile() const override;
-    void setDataFile(const std::string& file) override;
+    FxTrade* createTradeFromLine(std::string line);
+    void loadTradesFromFile(std::string filename, TradeList& tradeList) override;
 };
 
 #endif // FXTRADELOADER_H
