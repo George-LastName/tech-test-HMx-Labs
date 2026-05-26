@@ -5,21 +5,20 @@
 #include <ctime>
 #include <iomanip>
 #include <chrono>
+#include <algorithm>
 
 BondTrade* BondTradeLoader::createTradeFromLine(std::string line) {
     std::vector<std::string> items;
     std::stringstream ss(line);
     std::string item;
-    
-    while (std::getline(ss, item, separator)) {
+    while (std::getline(ss, item, separator_)) {
+        item.erase(std::remove_if(item.begin(), item.end(), [](unsigned char x) {return std::isspace(x);}), item.end());
         items.push_back(item);
     }
-    
     if (items.size() < 7) {
         throw std::runtime_error("Invalid line format");
     }
-    
-    BondTrade* trade = new BondTrade(items[6]);
+    BondTrade* trade = new BondTrade(items[6], items[0]);
     
     std::tm tm = {};
     std::istringstream dateStream(items[1]);

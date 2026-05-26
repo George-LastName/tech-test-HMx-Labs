@@ -10,7 +10,7 @@
 
 class BondTradeLoader : public ITradeLoader {
 private:
-    static constexpr char separator = ',';
+    static constexpr char separator_ = ',';
     std::string dataFile_;
     
     BondTrade* createTradeFromLine(std::string line);
