@@ -1,5 +1,7 @@
 #include "ScalarResults.h"
 #include <stdexcept>
+#include <iostream>
+#include <algorithm>
 
 ScalarResults::~ScalarResults() = default;
 
@@ -42,14 +44,20 @@ ScalarResults::Iterator::Iterator(ScalarResults::Iterator::result_it res_start,
                                   ScalarResults::Iterator::error_it  err_finish)
                             : results_begin_(res_start), results_end_(res_finish),
                               errors_begin_(err_start), errors_end_(err_finish){
-
 }
 
 
+
 ScalarResults::Iterator& ScalarResults::Iterator::operator++() {
-    if (results_begin_ != results_end_){
+    auto [results_not_done, errors_not_done] = GetProgress();
+
+    if(results_not_done && errors_not_done){
+        std::string min_trade_id = std::min(results_begin_->first, errors_begin_->first);
+        if (results_begin_->first == min_trade_id) ++results_begin_;
+        if (errors_begin_->first == min_trade_id) ++errors_begin_;
+    } else if (results_not_done){
         ++results_begin_;
-    } else if (errors_begin_ != errors_end_){
+    } else if (errors_not_done){
         ++errors_begin_;
     } else {
         throw std::runtime_error("Iterator::operator++() end of both maps");
@@ -58,26 +66,34 @@ ScalarResults::Iterator& ScalarResults::Iterator::operator++() {
 }
 
 ScalarResult ScalarResults::Iterator::operator*() const {
-    std::optional<double> priceResult = std::nullopt;
-    std::optional<std::string> error = std::nullopt;
+    auto [results_not_done, errors_not_done] = GetProgress();
     std::string tradeId;
 
-
-    if (results_begin_ != results_end_) {
+    if(results_not_done && errors_not_done ){
+        tradeId = std::min(results_begin_->first, errors_begin_->first);
+    } else if (results_not_done){
         tradeId = results_begin_->first;
-        priceResult = results_begin_->second;
-    } else if (errors_begin_ != errors_end_) {
+    } else if (errors_not_done) {
         tradeId = errors_begin_->first;
-        error= errors_begin_->second;
     } else {
-        throw std::runtime_error("Iterator::operator*() end of both maps");
+        throw std::runtime_error("Iterator::operator* end of both maps.");
     }
+
+    std::optional<double> priceResult = (results_not_done && tradeId == results_begin_->first)
+                                        ? std::optional<double>{results_begin_->second}
+                                        : std::nullopt;
+    std::optional<std::string> error = (errors_not_done && tradeId == errors_begin_->first)
+                                        ? std::optional<std::string>{errors_begin_->second}
+                                        : std::nullopt;
 
     return ScalarResult(tradeId, priceResult, error);
 }
-
 bool ScalarResults::Iterator::operator!=(const Iterator& other) const {
     return !(results_begin_ == other.results_begin_ && errors_begin_ == other.errors_begin_);
+}
+
+std::tuple<bool, bool>ScalarResults::Iterator::GetProgress() const{
+    return {(results_begin_ != results_end_),(errors_begin_ != errors_end_)};
 }
 
 ScalarResults::Iterator ScalarResults::begin() const {

@@ -33,6 +33,7 @@ public:
 
         Iterator() = default;
         Iterator(result_it res_start, result_it res_finish, error_it err_start, error_it err_finish);
+        // Iterator(std::vector<std::string> tradeIds);
 
         // Iterator must be constructable from ScalarResults parent
         Iterator& operator++();
@@ -43,6 +44,8 @@ public:
         result_it results_end_;
         error_it  errors_begin_;
         error_it  errors_end_;
+        // Returns true values if iterators are not at end. <results, errors>
+        std::tuple<bool, bool> GetProgress() const;
     };
 
     Iterator begin() const;
