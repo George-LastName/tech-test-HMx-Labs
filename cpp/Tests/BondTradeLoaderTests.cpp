@@ -5,20 +5,19 @@
 #include <chrono>
 #include <ctime>
 #include <cmath>
+#include <memory>
 
-static TradeList* tradeList = nullptr;
+static std::unique_ptr<TradeList> tradeList;
 
 void setUp() {
-    if (tradeList != nullptr) {
-        delete tradeList;
-    }
-    
+    tradeList = std::make_unique<TradeList>();
+
     BondTradeLoader loader;
     loader.setDataFile("Loaders/TradeData/BondTrades.dat");
     auto trades = loader.loadTrades();
-    tradeList = new TradeList();
     for (auto trade : trades) {
         tradeList->add(trade);
+
     }
 }
 

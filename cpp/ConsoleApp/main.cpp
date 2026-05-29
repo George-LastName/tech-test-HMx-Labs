@@ -5,7 +5,6 @@
 #include "../RiskSystem/ParallelPricer.h"
 #include "../RiskSystem/ScreenResultPrinter.h"
 #include <iostream>
-#include <string>
 
 #ifdef _WIN32
 #include <conio.h>
@@ -27,7 +26,7 @@ int _getch() {
 }
 #endif
 
-int main(int argc, char* argv[]) {
+int main() {
     SerialTradeLoader tradeLoader;
     auto allTrades = tradeLoader.loadTrades();
     

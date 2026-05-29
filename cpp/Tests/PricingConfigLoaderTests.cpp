@@ -5,12 +5,12 @@
 #include "../Models/FxTrade.h"
 #include <memory>
 
-static PricingEngineConfig* config = nullptr;
+static std::unique_ptr<PricingEngineConfig> config = nullptr;
 
 void setUpConfig() {
     PricingConfigLoader loader;
     loader.setConfigFile("RiskSystem/PricingConfig/PricingEngines.xml");
-    config = new PricingEngineConfig(loader.loadConfig());
+    config = std::make_unique<PricingEngineConfig>(loader.loadConfig());
 }
 
 TEST(TestConfigItemCount) {
