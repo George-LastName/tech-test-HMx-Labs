@@ -1,4 +1,5 @@
 #include "FxTradeLoader.h"
+#include "../Models/FxTrade.h"
 #include <stdexcept>
 #include <fstream>
 #include <sstream>
@@ -7,8 +8,9 @@
 #include <iomanip>
 #include <chrono>
 #include <algorithm>
+#include <memory>
 
-FxTrade* FxTradeLoader::createTradeFromLine(std::string line) {
+std::unique_ptr<ITrade> FxTradeLoader::createTradeFromLine(std::string line) {
     std::vector<std::string> items;
     std::string item;
 
@@ -24,24 +26,24 @@ FxTrade* FxTradeLoader::createTradeFromLine(std::string line) {
     if (items.size() < 9) {
         throw std::runtime_error("Invalid line format");
     }
-    FxTrade* trade = new FxTrade(items[8], items[0]);
+    FxTrade trade = FxTrade(items[8], items[0]);
 
     std::tm tm = {};
     std::istringstream dateStream(items[1]);
     dateStream >> std::get_time(&tm, "%Y-%m-%d");
     auto timePoint = std::chrono::system_clock::from_time_t(std::mktime(&tm));
-    trade->setTradeDate(timePoint);
+    trade.setTradeDate(timePoint);
     std::istringstream dateStream2(items[6]);
     dateStream2 >> std::get_time(&tm, "%Y-%m-%d");
     auto timePoint2 = std::chrono::system_clock::from_time_t(std::mktime(&tm));
-    trade->setValueDate(timePoint2);
+    trade.setValueDate(timePoint2);
 
-    trade->setInstrument(items[2]+items[3]);
-    trade->setCounterparty(items[7]);
-    trade->setNotional(std::stod(items[4]));
-    trade->setRate(std::stod(items[5]));
+    trade.setInstrument(items[2]+items[3]);
+    trade.setCounterparty(items[7]);
+    trade.setNotional(std::stod(items[4]));
+    trade.setRate(std::stod(items[5]));
 
-    return trade;
+    return std::make_unique<FxTrade>(trade);
 }
 
 void FxTradeLoader::loadTradesFromFile(std::string filename, TradeList& tradeList) {

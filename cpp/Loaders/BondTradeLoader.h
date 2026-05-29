@@ -2,7 +2,7 @@
 #define BONDTRADELOADER_H
 
 #include "ITradeLoader.h"
-#include "../Models/BondTrade.h"
+#include "../Models/ITrade.h"
 #include "../Models/TradeList.h"
 #include <string>
 #include <vector>
@@ -12,7 +12,7 @@ class BondTradeLoader : public ITradeLoader {
 private:
     static constexpr char separator_ = ',';
     
-    BondTrade* createTradeFromLine(std::string line);
+    std::unique_ptr<ITrade> createTradeFromLine(std::string line);
     void loadTradesFromFile(std::string filename, TradeList& tradeList) override;
 };
 
