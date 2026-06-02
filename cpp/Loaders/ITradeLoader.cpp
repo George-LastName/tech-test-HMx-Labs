@@ -1,5 +1,4 @@
 #include "ITradeLoader.h"
-#include <fstream>
 #include <vector>
 #include <string>
 #include <algorithm>
@@ -26,25 +25,4 @@ std::vector<std::string> ITradeLoader::splitLine(std::string line){
     }
     items.push_back(line);
     return items;
-}
-
-void ITradeLoader::loadTradesFromFile(std::string filename, TradeList& tradeList) {
-    if (filename.empty()) {
-        throw std::invalid_argument("Filename cannot be null");
-    }
-
-    std::ifstream stream(filename);
-    if (!stream.is_open()) {
-        throw std::runtime_error("Cannot open file: " + filename);
-    }
-
-    int lineCount = 0;
-    std::string line;
-    while (std::getline(stream, line)) {
-        if (lineCount == 0) {
-        } else {
-            tradeList.add(createTradeFromLine(line));
-        }
-        lineCount++;
-    }
 }
