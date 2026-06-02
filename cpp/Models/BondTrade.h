@@ -16,6 +16,10 @@ public:
         }
         tradeId_ = tradeId;
     }
+
+    BondTrade* clone() const override {
+        return new BondTrade(*this);
+    }
     
     std::string getTradeType() const override { return tradeType_; }
     

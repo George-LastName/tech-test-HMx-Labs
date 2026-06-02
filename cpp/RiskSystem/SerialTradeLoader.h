@@ -2,7 +2,7 @@
 #define SERIALTRADELOADER_H
 
 #include "../Loaders/ITradeLoader.h"
-#include "../Models/ITrade.h"
+#include "../Models/TradeList.h"
 #include <vector>
 #include <memory>
 
@@ -11,7 +11,7 @@ private:
     std::vector<std::unique_ptr<ITradeLoader>> getTradeLoaders();
     
 public:
-    std::vector<std::vector<ITrade*>> loadTrades();
+    std::vector<TradeList> loadTrades();
 };
 
 #endif // SERIALTRADELOADER_H

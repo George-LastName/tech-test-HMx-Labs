@@ -16,6 +16,10 @@ public:
             tradeId_ = tradeId;
         }
     }
+
+    FxTrade* clone() const override {
+        return new FxTrade(*this);
+    }
     
     std::string getTradeType() const override {
         return tradeType_;

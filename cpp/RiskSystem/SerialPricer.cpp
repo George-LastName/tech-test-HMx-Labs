@@ -6,6 +6,7 @@
 #include "../Pricers/GovBondPricingEngine.h"
 #include "../Pricers/CorpBondPricingEngine.h"
 #include "../Pricers/FxPricingEngine.h"
+#include "../Models/TradeList.h"
 
 SerialPricer::~SerialPricer() {
 
@@ -31,7 +32,7 @@ void SerialPricer::loadPricers() {
     }
 }
 
-void SerialPricer::price(const std::vector<std::vector<ITrade*>>& tradeContainers, 
+void SerialPricer::price(const std::vector<TradeList>& tradeContainers,
                          IScalarResultReceiver* resultReceiver) {
     loadPricers();
     

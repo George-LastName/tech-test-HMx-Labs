@@ -1,6 +1,7 @@
 #include "SerialTradeLoader.h"
 #include "../Loaders/BondTradeLoader.h"
 #include "../Loaders/FxTradeLoader.h"
+#include "../Models/TradeList.h"
 
 #include <memory>
 
@@ -18,9 +19,9 @@ std::vector<std::unique_ptr<ITradeLoader>> SerialTradeLoader::getTradeLoaders() 
     return loaders;
 }
 
-std::vector<std::vector<ITrade*>> SerialTradeLoader::loadTrades() {
+std::vector<TradeList> SerialTradeLoader::loadTrades() {
     auto loaders = getTradeLoaders();
-    std::vector<std::vector<ITrade*>> result;
+    std::vector<TradeList> result;
     
     for (auto& loader : loaders) {
         result.push_back(loader->loadTrades());

@@ -15,11 +15,7 @@ void setUp() {
     
     BondTradeLoader loader;
     loader.setDataFile("Loaders/TradeData/BondTrades.dat");
-    auto trades = loader.loadTrades();
-    tradeList = new TradeList();
-    for (auto trade : trades) {
-        tradeList->add(trade);
-    }
+    tradeList = new TradeList(loader.loadTrades());
 }
 
 TEST(TestTradeLoadCount) {

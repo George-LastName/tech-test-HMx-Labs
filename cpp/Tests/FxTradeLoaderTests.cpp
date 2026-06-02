@@ -15,11 +15,7 @@ void setUpFx() {
     
     FxTradeLoader loader;
     loader.setDataFile("Loaders/TradeData/FxTrades.dat");
-    auto trades = loader.loadTrades();
-    fxTradeList = new TradeList();
-    for (auto trade : trades) {
-        fxTradeList->add(trade);
-    }
+    fxTradeList = new TradeList(loader.loadTrades());
 }
 
 TEST(TestFxTradeLoadCount) {

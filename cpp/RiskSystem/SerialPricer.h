@@ -2,7 +2,7 @@
 #define SERIALPRICER_H
 
 #include "../Models/IPricingEngine.h"
-#include "../Models/ITrade.h"
+#include "../Models/TradeList.h"
 #include "../Models/IScalarResultReceiver.h"
 #include "PricingConfigLoader.h"
 #include <map>
@@ -17,7 +17,7 @@ private:
     
 public:
     ~SerialPricer();
-    void price(const std::vector<std::vector<ITrade*>>& tradeContainers, 
+    void price(const std::vector<TradeList>& tradeContainers,
                IScalarResultReceiver* resultReceiver);
 };
 

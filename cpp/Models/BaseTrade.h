@@ -9,6 +9,7 @@ class BaseTrade : public ITrade {
 public:
     BaseTrade() = default;
     virtual ~BaseTrade() = default;
+    virtual ITrade* clone() const override = 0;
     
     std::chrono::system_clock::time_point getTradeDate() const override { return tradeDate_; }
     void setTradeDate(const std::chrono::system_clock::time_point& date) override { tradeDate_ = date; }

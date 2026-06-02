@@ -11,7 +11,7 @@ protected:
     std::string dataFile_;
 public:
     virtual ~ITradeLoader() = default;
-    virtual std::vector<ITrade*> loadTrades();
+    virtual TradeList loadTrades();
     virtual void loadTradesFromFile(std::string filename, TradeList& tradeList) = 0;
 
     virtual std::string getDataFile() const {return dataFile_;}

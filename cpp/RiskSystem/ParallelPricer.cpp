@@ -1,4 +1,5 @@
 #include "ParallelPricer.h"
+#include "../Models/TradeList.h"
 #include <stdexcept>
 
 ParallelPricer::~ParallelPricer() {
@@ -15,7 +16,7 @@ void ParallelPricer::loadPricers() {
     }
 }
 
-void ParallelPricer::price(const std::vector<std::vector<ITrade*>>& tradeContainers, 
+void ParallelPricer::price(const std::vector<TradeList>& tradeContainers,
                            IScalarResultReceiver* resultReceiver) {
     throw std::runtime_error("Not implemented");
 }
