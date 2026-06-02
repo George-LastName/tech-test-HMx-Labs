@@ -8,12 +8,10 @@
 std::vector<std::unique_ptr<ITradeLoader>> SerialTradeLoader::getTradeLoaders() {
     std::vector<std::unique_ptr<ITradeLoader>> loaders;
 
-    std::unique_ptr<BondTradeLoader> bondLoader = std::make_unique<BondTradeLoader>();
-    bondLoader->setDataFile("TradeData/BondTrades.dat");
+    std::unique_ptr<BondTradeLoader> bondLoader = std::make_unique<BondTradeLoader>("TradeData/BondTrades.dat");
     loaders.push_back(std::move(bondLoader));
 
-    std::unique_ptr<FxTradeLoader> fxLoader = std::make_unique<FxTradeLoader>();
-    fxLoader->setDataFile("TradeData/FxTrades.dat");
+    std::unique_ptr<FxTradeLoader> fxLoader = std::make_unique<FxTradeLoader>("TradeData/FxTrades.dat");
     loaders.push_back(std::move(fxLoader));
     
     return loaders;

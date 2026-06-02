@@ -13,8 +13,7 @@ void setUpFx() {
         delete fxTradeList;
     }
     
-    FxTradeLoader loader;
-    loader.setDataFile("Loaders/TradeData/FxTrades.dat");
+    FxTradeLoader loader("Loaders/TradeData/FxTrades.dat");
     fxTradeList = new TradeList(loader.loadTrades());
 }
 

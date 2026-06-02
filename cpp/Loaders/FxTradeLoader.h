@@ -14,7 +14,7 @@ private:
     FxTrade* createTradeFromLine(std::string line) override;
     void loadTradesFromFile(std::string filename, TradeList& tradeList) override;
 public:
-    FxTradeLoader() : ITradeLoader("¬") {}
+    FxTradeLoader(std::string dataFile) : ITradeLoader(dataFile, "¬") {}
 
 };
 

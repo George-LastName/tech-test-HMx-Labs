@@ -13,8 +13,7 @@ void setUp() {
         delete tradeList;
     }
     
-    BondTradeLoader loader;
-    loader.setDataFile("Loaders/TradeData/BondTrades.dat");
+    BondTradeLoader loader("Loaders/TradeData/BondTrades.dat");
     tradeList = new TradeList(loader.loadTrades());
 }
 

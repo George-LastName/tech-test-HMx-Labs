@@ -12,7 +12,7 @@ protected:
     std::string separator_;
 public:
     // ITradeLoader() = default;
-    ITradeLoader(std::string separator) : separator_(separator) {}
+    ITradeLoader(std::string dataFile, std::string separator) : dataFile_(dataFile), separator_(separator) {}
 
     TradeList loadTrades();
     std::vector<std::string> splitLine(std::string line);

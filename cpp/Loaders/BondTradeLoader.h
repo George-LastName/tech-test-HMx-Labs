@@ -15,7 +15,7 @@ private:
     BondTrade* createTradeFromLine(std::string line) override;
     void loadTradesFromFile(std::string filename, TradeList& tradeList) override;
 public:
-    BondTradeLoader() : ITradeLoader(",") {}
+    BondTradeLoader(std::string dataFile) : ITradeLoader(dataFile, ",") {}
 };
 
 #endif // BONDTRADELOADER_H
