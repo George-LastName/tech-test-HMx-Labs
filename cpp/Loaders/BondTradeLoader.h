@@ -10,8 +10,6 @@
 
 class BondTradeLoader : public ITradeLoader {
 private:
-    // static constexpr std::string separator_ = ",";
-
     BondTrade* createTradeFromLine(std::string line) override;
     void loadTradesFromFile(std::string filename, TradeList& tradeList) override;
 public:
