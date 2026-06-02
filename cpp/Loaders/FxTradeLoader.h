@@ -9,10 +9,13 @@
 
 class FxTradeLoader : public ITradeLoader {
 private:
-    static constexpr std::string separator_ = "¬";
-    
-    FxTrade* createTradeFromLine(std::string line);
+    // static constexpr std::string separator_ = "¬";
+
+    FxTrade* createTradeFromLine(std::string line) override;
     void loadTradesFromFile(std::string filename, TradeList& tradeList) override;
+public:
+    FxTradeLoader() : ITradeLoader("¬") {}
+
 };
 
 #endif // FXTRADELOADER_H

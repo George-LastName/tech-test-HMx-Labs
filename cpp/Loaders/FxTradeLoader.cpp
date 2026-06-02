@@ -1,25 +1,13 @@
 #include "FxTradeLoader.h"
 #include <stdexcept>
 #include <fstream>
-#include <sstream>
 #include <stdexcept>
 #include <ctime>
 #include <iomanip>
 #include <chrono>
-#include <algorithm>
 
 FxTrade* FxTradeLoader::createTradeFromLine(std::string line) {
-    std::vector<std::string> items;
-    std::string item;
-
-    size_t delimiter_pos = 0;
-    line.erase(std::remove_if(line.begin(), line.end(), [](unsigned char x) {return std::isspace(x);}), line.end());
-    while((delimiter_pos = line.find(separator_)) != std::string::npos){
-        item = line.substr(0, delimiter_pos);
-        items.push_back(item);
-        line.erase(0, delimiter_pos+separator_.length());
-    }
-    items.push_back(line);
+    auto items = splitLine(line);
 
     if (items.size() < 9) {
         throw std::runtime_error("Invalid line format");
