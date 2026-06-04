@@ -5,14 +5,13 @@
 #include "../Models/FxTrade.h"
 #include "../Models/TradeList.h"
 #include <string>
-#include <vector>
 
 class FxTradeLoader : public ITradeLoader {
 private:
     FxTrade* createTradeFromLine(std::string line) override;
     void loadTradesFromFile(std::string filename, TradeList& tradeList) override;
 public:
-    FxTradeLoader(std::string dataFile) : ITradeLoader(dataFile, "¬") {}
+    FxTradeLoader(std::string dataFile) : ITradeLoader(std::move(dataFile), "¬") {}
 
 };
 

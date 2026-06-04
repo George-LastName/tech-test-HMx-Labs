@@ -1,10 +1,12 @@
 #include "StreamingTradeLoader.h"
 
 #include "../Models/ITrade.h"
+#include "../Models/IScalarResultReceiver.h"
 
 #include <stdexcept>
 #include <fstream>
 #include <memory>
+#include <string>
 
 void StreamingTradeLoader::loadAndPrice(IScalarResultReceiver* resultReceiver) {
     loadPricers();

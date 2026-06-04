@@ -1,7 +1,6 @@
 #include "../RiskSystem/SerialTradeLoader.h"
 #include "../RiskSystem/StreamingTradeLoader.h"
 #include "../Models/ScalarResults.h"
-#include "../RiskSystem/SerialPricer.h"
 #include "../RiskSystem/ParallelPricer.h"
 #include "../RiskSystem/ScreenResultPrinter.h"
 #include <iostream>

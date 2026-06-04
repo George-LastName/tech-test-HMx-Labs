@@ -1,7 +1,12 @@
 #include "ITradeLoader.h"
+#include "../Models/TradeList.h"
+
 #include <vector>
 #include <string>
 #include <algorithm>
+#include <cctype>
+#include <cstddef>
+#include <cstring>
 
 
 TradeList ITradeLoader::loadTrades() {
@@ -21,7 +26,7 @@ std::vector<std::string> ITradeLoader::splitLine(std::string line){
     while((delimiter_pos = line.find(separator_)) != std::string::npos){
         item = line.substr(0, delimiter_pos);
         items.push_back(item);
-        line.erase(0, delimiter_pos+separator_.length());
+        line.erase(0, delimiter_pos+strlen(separator_));
     }
     items.push_back(line);
     return items;

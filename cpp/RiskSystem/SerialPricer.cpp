@@ -1,6 +1,10 @@
 #include "SerialPricer.h"
+#include "../Models/ITrade.h"
 #include "../Models/TradeList.h"
+#include "../Models/IScalarResultReceiver.h"
+#include "../Pricers/IPricingEngine.h"
 
+#include <vector>
 #include <string>
 
 

@@ -9,10 +9,9 @@
 class ITradeLoader {
 protected:
     std::string dataFile_;
-    std::string separator_;
+    const char* separator_;
 public:
-    // ITradeLoader() = default;
-    ITradeLoader(std::string dataFile, std::string separator) : dataFile_(dataFile), separator_(separator) {}
+    ITradeLoader(std::string dataFile, const char* separator) : dataFile_(std::move(dataFile)), separator_(separator) {}
 
     TradeList loadTrades();
     std::vector<std::string> splitLine(std::string line);

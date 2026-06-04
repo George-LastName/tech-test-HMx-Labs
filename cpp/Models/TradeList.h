@@ -9,7 +9,7 @@ class TradeList : public ITradeReceiver {
 public:
     TradeList() = default;
 
-    ~TradeList(){
+    ~TradeList() override {
         for (auto trade : trades_){
             delete trade;
         }

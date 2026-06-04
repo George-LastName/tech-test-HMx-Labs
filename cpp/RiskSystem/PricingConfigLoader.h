@@ -10,7 +10,7 @@ private:
     PricingEngineConfig parseXml(const std::string& content);
     
 public:
-    PricingConfigLoader(std::string configFile) : configFile_(configFile) {}
+    PricingConfigLoader(std::string configFile) : configFile_(std::move(configFile)) {}
     std::string getConfigFile() const;
     void setConfigFile(const std::string& file);
     PricingEngineConfig loadConfig();
