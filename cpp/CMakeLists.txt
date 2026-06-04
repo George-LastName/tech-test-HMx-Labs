@@ -54,6 +54,10 @@ add_library(RiskSystem
     RiskSystem/ParallelPricer.cpp
     RiskSystem/ScreenResultPrinter.h
     RiskSystem/ScreenResultPrinter.cpp
+    RiskSystem/BaseLoaderTrades.h
+    RiskSystem/BaseLoaderTrades.cpp
+    RiskSystem/BasePricer.h
+    RiskSystem/BasePricer.cpp
 )
 
 target_include_directories(RiskSystem PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})

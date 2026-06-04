@@ -4,19 +4,14 @@
 #include "../Models/IPricingEngine.h"
 #include "../Models/TradeList.h"
 #include "../Models/IScalarResultReceiver.h"
+#include "BasePricer.h"
 #include "PricingConfigLoader.h"
-#include <map>
-#include <vector>
-#include <string>
-#include <memory>
 
-class SerialPricer {
-private:
-    std::map<std::string, std::unique_ptr<IPricingEngine>> pricers_;
-    void loadPricers();
-    
+#include <vector>
+
+class SerialPricer : BasePricer {
 public:
-    ~SerialPricer();
+    ~SerialPricer() = default;
     void price(const std::vector<TradeList>& tradeContainers,
                IScalarResultReceiver* resultReceiver);
 };

@@ -8,8 +8,7 @@
 static std::unique_ptr<PricingEngineConfig> config = nullptr;
 
 void setUpConfig() {
-    PricingConfigLoader loader;
-    loader.setConfigFile("RiskSystem/PricingConfig/PricingEngines.xml");
+    PricingConfigLoader loader("RiskSystem/PricingConfig/PricingEngines.xml");
     config = std::make_unique<PricingEngineConfig>(loader.loadConfig());
 }
 

@@ -27,12 +27,9 @@ int _getch() {
 #endif
 
 int main() {
-    SerialTradeLoader tradeLoader;
-    auto allTrades = tradeLoader.loadTrades();
-    
+    StreamingTradeLoader streamingLoader;
     ScalarResults results;
-    SerialPricer pricer;
-    pricer.price(allTrades, &results);
+    streamingLoader.loadAndPrice(&results);
     
     ScreenResultPrinter screenPrinter;
     screenPrinter.printResults(results);

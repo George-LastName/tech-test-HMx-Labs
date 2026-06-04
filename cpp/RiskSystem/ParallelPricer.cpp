@@ -7,8 +7,7 @@ ParallelPricer::~ParallelPricer() {
 }
 
 void ParallelPricer::loadPricers() {
-    PricingConfigLoader pricingConfigLoader;
-    pricingConfigLoader.setConfigFile("./PricingConfig/PricingEngines.xml");
+    PricingConfigLoader pricingConfigLoader("./PricingConfig/PricingEngines.xml");
     PricingEngineConfig pricerConfig = pricingConfigLoader.loadConfig();
     
     for (const auto& configItem : pricerConfig) {
