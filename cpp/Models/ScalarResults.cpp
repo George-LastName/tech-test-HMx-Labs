@@ -1,7 +1,7 @@
 #include "ScalarResults.h"
 #include <stdexcept>
-#include <iostream>
 #include <algorithm>
+#include <mutex>
 
 ScalarResults::~ScalarResults() = default;
 
@@ -31,10 +31,12 @@ bool ScalarResults::containsTrade(const std::string& tradeId) const {
 }
 
 void ScalarResults::addResult(const std::string& tradeId, double result) {
+    std::lock_guard<std::mutex> lock(mutex_);
     results_[tradeId] = result;
 }
 
 void ScalarResults::addError(const std::string& tradeId, const std::string& error) {
+    std::lock_guard<std::mutex> lock(mutex_);
     errors_[tradeId] = error;
 }
 

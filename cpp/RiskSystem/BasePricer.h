@@ -1,7 +1,7 @@
 #ifndef BASEPRICER_H
 #define BASEPRICER_H
 
-#include "../Models/IPricingEngine.h"
+#include "../Pricers/IPricingEngine.h"
 
 #include <memory>
 #include <map>

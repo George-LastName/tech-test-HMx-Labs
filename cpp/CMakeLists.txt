@@ -14,7 +14,7 @@ add_library(Models STATIC
 target_include_directories(Models PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 
 # Loaders library
-add_library(Loaders
+add_library(Loaders STATIC
     Loaders/ITradeLoader.h
     Loaders/ITradeLoader.cpp
     Loaders/BondTradeLoader.h
@@ -27,19 +27,20 @@ target_include_directories(Loaders PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 target_link_libraries(Loaders Models)
 
 # Pricers library
-add_library(Pricers
+add_library(Pricers STATIC
     Pricers/BasePricingEngine.h
     Pricers/BasePricingEngine.cpp
     Pricers/GovBondPricingEngine.h
     Pricers/CorpBondPricingEngine.h
     Pricers/FxPricingEngine.h
+    Pricers/IPricingEngine.h
 )
 
 target_include_directories(Pricers PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 target_link_libraries(Pricers Models)
 
 # RiskSystem library
-add_library(RiskSystem
+add_library(RiskSystem STATIC
     RiskSystem/PricingEngineConfigItem.h
     RiskSystem/PricingEngineConfig.h
     RiskSystem/PricingConfigLoader.h
@@ -80,6 +81,16 @@ option(ENABLE_ASAN "Enable AddressSanitizer" OFF)
 if(ENABLE_ASAN)
     add_compile_options(-fsanitize=address -fno-omit-frame-pointer -g)
     add_link_options(-fsanitize=address -fno-omit-frame-pointer)
+endif()
+
+option(ENABLE_TSAN "Enable ThreadSanitizer" OFF)
+if(ENABLE_TSAN)
+    add_compile_options(-fsanitize=thread -fno-omit-frame-pointer -g)
+    add_link_options(-fsanitize=thread -fno-omit-frame-pointer)
+endif()
+
+if(ENABLE_ASAN AND ENABLE_TSAN)
+    message(FATAL_ERROR "Both ASAN & TSAN are enlabled.")
 endif()
 
 target_link_libraries(ConsoleApp Models Loaders Pricers RiskSystem)

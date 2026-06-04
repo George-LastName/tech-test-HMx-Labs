@@ -1,8 +1,8 @@
 #ifndef IPRICINGENGINE_H
 #define IPRICINGENGINE_H
 
-#include "ITrade.h"
-#include "IScalarResultReceiver.h"
+#include "../Models/ITrade.h"
+#include "../Models/IScalarResultReceiver.h"
 
 class IPricingEngine {
 public:

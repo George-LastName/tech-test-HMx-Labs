@@ -1,7 +1,7 @@
 #ifndef BASEPRICINGENGINE_H
 #define BASEPRICINGENGINE_H
 
-#include "../Models/IPricingEngine.h"
+#include "IPricingEngine.h"
 #include "../Models/ITrade.h"
 #include "../Models/IScalarResultReceiver.h"
 #include <map>

@@ -1,7 +1,7 @@
 #ifndef SERIALPRICER_H
 #define SERIALPRICER_H
 
-#include "../Models/IPricingEngine.h"
+#include "../Pricers/IPricingEngine.h"
 #include "../Models/TradeList.h"
 #include "../Models/IScalarResultReceiver.h"
 #include "BasePricer.h"

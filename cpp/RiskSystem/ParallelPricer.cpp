@@ -1,21 +1,28 @@
 #include "ParallelPricer.h"
 #include "../Models/TradeList.h"
-#include <stdexcept>
 
-ParallelPricer::~ParallelPricer() {
+#include <vector>
+#include <future>
 
-}
-
-void ParallelPricer::loadPricers() {
-    PricingConfigLoader pricingConfigLoader("./PricingConfig/PricingEngines.xml");
-    PricingEngineConfig pricerConfig = pricingConfigLoader.loadConfig();
-    
-    for (const auto& configItem : pricerConfig) {
-        throw std::runtime_error("Not implemented");
-    }
-}
 
 void ParallelPricer::price(const std::vector<TradeList>& tradeContainers,
                            IScalarResultReceiver* resultReceiver) {
-    throw std::runtime_error("Not implemented");
+    loadPricers();
+
+    std::vector<std::future<void>> results;
+
+    for (const auto& tradeContainer : tradeContainers) {
+        for (ITrade* trade : tradeContainer) {
+            results.push_back(std::async(std::launch::async, [this, trade, resultReceiver]() {
+                std::string tradeType = trade->getTradeType();
+                if (pricers_.find(tradeType) == pricers_.end()) {
+                    resultReceiver->addError(trade->getTradeId(), "No Pricing Engines available for this trade type");
+                } else {
+                    pricers_[tradeType].get()->price(trade, resultReceiver);
+                }
+            }));
+        }
+    }
+
+    for (auto& result : results) result.get();
 }

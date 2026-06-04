@@ -28,11 +28,25 @@ int _getch() {
 
 int main() {
     StreamingTradeLoader streamingLoader;
-    ScalarResults results;
-    streamingLoader.loadAndPrice(&results);
-    
+    ScalarResults streamingResults;
+    std::cout << "Streaming Loader Start\n";
+    streamingLoader.loadAndPrice(&streamingResults);
+
+
+    SerialTradeLoader tradeLoader;
+    std::cout << "Serial Loader Start\n";
+    auto allTrades = tradeLoader.loadTrades();
+
+    ScalarResults parallelResults;
+    ParallelPricer parallelPricer;
+    std::cout << "Parallel Pricer Start\n";
+    parallelPricer.price(allTrades, &parallelResults);
+
     ScreenResultPrinter screenPrinter;
-    screenPrinter.printResults(results);
+    std::cout << "Streaming Results\n";
+    screenPrinter.printResults(streamingResults);
+    std::cout << "------------------\nParallel Results\n";
+    screenPrinter.printResults(parallelResults);
     
     std::cout << "Press any key to exit.." << std::endl;
     _getch();

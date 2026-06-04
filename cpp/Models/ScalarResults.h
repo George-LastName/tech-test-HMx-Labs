@@ -8,17 +8,18 @@
 #include <optional>
 #include <string>
 #include <iterator>
+#include <mutex>
 
 class ScalarResults : public IScalarResultReceiver {
 public:
-    virtual ~ScalarResults();
+    ~ScalarResults();
     std::optional<ScalarResult> operator[](const std::string& tradeId) const;
 
     bool containsTrade(const std::string& tradeId) const;
 
-    virtual void addResult(const std::string& tradeId, double result) override;
+    void addResult(const std::string& tradeId, double result) override;
 
-    virtual void addError(const std::string& tradeId, const std::string& error) override;
+    void addError(const std::string& tradeId, const std::string& error) override;
 
     class Iterator {
     public:
@@ -33,7 +34,6 @@ public:
 
         Iterator() = default;
         Iterator(result_it res_start, result_it res_finish, error_it err_start, error_it err_finish);
-        // Iterator(std::vector<std::string> tradeIds);
 
         // Iterator must be constructable from ScalarResults parent
         Iterator& operator++();
@@ -54,6 +54,7 @@ public:
 private:
     std::map<std::string, double> results_;
     std::map<std::string, std::string> errors_;
+    std::mutex mutex_;
 };
 
 #endif // SCALARRESULTS_H
