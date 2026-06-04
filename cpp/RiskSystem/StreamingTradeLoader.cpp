@@ -1,5 +1,7 @@
 #include "StreamingTradeLoader.h"
 
+#include "../Models/ITrade.h"
+
 #include <stdexcept>
 #include <fstream>
 #include <memory>
@@ -24,13 +26,14 @@ void StreamingTradeLoader::loadAndPrice(IScalarResultReceiver* resultReceiver) {
             if (line.find("Type") != std::string::npos || line.find("FxTrades") != std::string::npos || line.find("END") != std::string::npos) {
                 continue;
             } else {
-                auto trade = loader->createTradeFromLine(line);
+                ITrade* trade = loader->createTradeFromLine(line);
                 std::string tradeType = trade->getTradeType();
                 if (pricers_.find(tradeType) == pricers_.end()) {
                     resultReceiver->addError(trade->getTradeId(), "No Pricing Engines available for this trade type");
-                    continue;
+                } else {
+                    pricers_[tradeType]->price(trade, resultReceiver);
                 }
-                pricers_[tradeType]->price(trade, resultReceiver);
+                delete trade;
             }
         }
     }
