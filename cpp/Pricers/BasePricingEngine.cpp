@@ -5,6 +5,7 @@
 #include <iostream>
 #include <stdexcept>
 #include <limits>
+#include <mutex>
 
 BasePricingEngine::BasePricingEngine() : delay_(5000) {
 }
@@ -75,6 +76,7 @@ BasePricingEngine::Random::Random() : gen_(rd_()), dist_(0, std::numeric_limits<
 }
 
 double BasePricingEngine::Random::nextDouble() {
+    std::lock_guard<std::mutex> lock(mutex_);
     return static_cast<double>(dist_(gen_)) / static_cast<double>(std::numeric_limits<unsigned int>::max());
 }
 

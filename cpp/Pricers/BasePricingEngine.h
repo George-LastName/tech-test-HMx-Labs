@@ -7,6 +7,7 @@
 #include <map>
 #include <string>
 #include <random>
+#include <mutex>
 
 class BasePricingEngine : public IPricingEngine {
 private:
@@ -18,11 +19,12 @@ private:
         Random();
         double nextDouble();
     private:
+        std::mutex mutex_;
         std::random_device rd_;
         std::mt19937 gen_;
         std::uniform_int_distribution<unsigned int> dist_;
     };
-    
+
     Random random_;
     
     static std::map<std::string, std::string>& getTradesToError();
@@ -30,7 +32,7 @@ private:
 
 protected:
     BasePricingEngine();
-    virtual ~BasePricingEngine() = default;
+    ~BasePricingEngine() override = default;
 
     void price(ITrade* trade, IScalarResultReceiver* resultReceiver) override;
     void addSupportedTradeType(const std::string& tradeType);
