@@ -1,0 +1,15 @@
+Checks: >
+  bugprone-*,
+  modernize-use-nullptr,
+  modernize-use-override,
+  modernize-use-default-member-init,
+  modernize-pass-by-value,
+  performance-unnecessary-value-param,
+  performance-move-const-arg,
+  readability-const-return-type,
+  misc-include-cleaner,
+  -bugprone-easily-swappable-parameters
+
+WarningsAsErrors: ''
+HeaderFilterRegex: '.*'
+FormatStyle: none
