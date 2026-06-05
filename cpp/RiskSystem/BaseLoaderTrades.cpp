@@ -5,6 +5,7 @@
 
 #include <vector>
 #include <memory>
+#include <utility>
 
 std::vector<std::unique_ptr<ITradeLoader>> BaseLoaderTrades::getTradeLoaders(){
     std::vector<std::unique_ptr<ITradeLoader>> loaders;

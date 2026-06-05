@@ -4,13 +4,11 @@
 #include "ITrade.h"
 #include <chrono>
 #include <string>
-#include <assert.h>
+#include <stdexcept>
 
 class BaseTrade : public ITrade {
 public:
-    // BaseTrade() = default;
     BaseTrade(const std::string& tradeId, const std::string& tradeType) {
-    // : tradeId_(std::move(tradeId)), tradeType_(std::move(tradeType)) {
         if (tradeId.empty()) {
             throw std::invalid_argument("A valid non null, non empty trade ID must be provided.");
         }
