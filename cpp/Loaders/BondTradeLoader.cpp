@@ -1,7 +1,6 @@
 #include "BondTradeLoader.h"
 #include "../Models/BondTrade.h"
 #include "../Models/TradeList.h"
-
 #include <fstream>
 #include <sstream>
 #include <stdexcept>
@@ -9,6 +8,7 @@
 #include <iomanip>
 #include <chrono>
 #include <string>
+#include <vector>
 
 BondTrade* BondTradeLoader::createTradeFromLine(std::string line) {
     auto items = splitLine(line);

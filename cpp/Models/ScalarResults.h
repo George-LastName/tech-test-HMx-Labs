@@ -1,6 +1,5 @@
 #ifndef SCALARRESULTS_H
 #define SCALARRESULTS_H
-
 #include "IScalarResultReceiver.h"
 #include "ScalarResult.h"
 #include <map>
@@ -8,6 +7,8 @@
 #include <string>
 #include <iterator>
 #include <mutex>
+#include <tuple>
+#include <cstddef>
 
 class ScalarResults : public IScalarResultReceiver {
 public:

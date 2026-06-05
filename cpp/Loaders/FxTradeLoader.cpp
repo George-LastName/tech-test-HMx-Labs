@@ -1,7 +1,6 @@
 #include "FxTradeLoader.h"
 #include "../Models/FxTrade.h"
 #include "../Models/TradeList.h"
-
 #include <stdexcept>
 #include <fstream>
 #include <sstream>
@@ -9,6 +8,7 @@
 #include <iomanip>
 #include <chrono>
 #include <string>
+#include <vector>
 
 FxTrade* FxTradeLoader::createTradeFromLine(std::string line) {
     auto items = splitLine(line);

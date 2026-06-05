@@ -1,9 +1,8 @@
 #ifndef FXTRADELOADER_H
 #define FXTRADELOADER_H
-
 #include "ITradeLoader.h"
 #include "../Models/FxTrade.h"
-#include "../Models/TradeList.h"
+#include <utility>
 #include <string>
 
 class FxTradeLoader : public ITradeLoader {

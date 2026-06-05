@@ -1,12 +1,12 @@
 #include "ScalarResults.h"
 #include "ScalarResult.h"
-
 #include <stdexcept>
 #include <algorithm>
 #include <mutex>
 #include <optional>
 #include <string>
 #include <tuple>
+#include <utility>
 
 std::optional<ScalarResult> ScalarResults::operator[](const std::string& tradeId) const {
     if (!containsTrade(tradeId)) {
