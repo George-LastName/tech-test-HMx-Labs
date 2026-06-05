@@ -1,4 +1,7 @@
 #include "BasePricingEngine.h"
+#include "../Models/ITrade.h"
+#include "../Models/IScalarResultReceiver.h"
+
 #include <random>
 #include <thread>
 #include <chrono>
@@ -6,9 +9,8 @@
 #include <stdexcept>
 #include <limits>
 #include <mutex>
-
-BasePricingEngine::BasePricingEngine() : delay_(5000) {
-}
+#include <string>
+#include <map>
 
 void BasePricingEngine::price(ITrade* trade, IScalarResultReceiver* resultReceiver) {
     if (resultReceiver == nullptr) {

@@ -1,9 +1,12 @@
 #include "ScalarResults.h"
+#include "ScalarResult.h"
+
 #include <stdexcept>
 #include <algorithm>
 #include <mutex>
-
-ScalarResults::~ScalarResults() = default;
+#include <optional>
+#include <string>
+#include <tuple>
 
 std::optional<ScalarResult> ScalarResults::operator[](const std::string& tradeId) const {
     if (!containsTrade(tradeId)) {

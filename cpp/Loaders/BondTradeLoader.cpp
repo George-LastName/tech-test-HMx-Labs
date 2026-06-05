@@ -3,6 +3,7 @@
 #include "../Models/TradeList.h"
 
 #include <fstream>
+#include <sstream>
 #include <stdexcept>
 #include <ctime>
 #include <iomanip>

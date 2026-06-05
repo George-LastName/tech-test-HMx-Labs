@@ -1,9 +1,11 @@
 #include "ParallelPricer.h"
 #include "../Models/TradeList.h"
+#include "../Models/IScalarResultReceiver.h"
+#include "../Models/ITrade.h"
 
 #include <vector>
 #include <future>
-
+#include <string>
 
 void ParallelPricer::price(const std::vector<TradeList>& tradeContainers,
                            IScalarResultReceiver* resultReceiver) {

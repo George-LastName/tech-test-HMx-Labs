@@ -4,7 +4,6 @@
 #include "IScalarResultReceiver.h"
 #include "ScalarResult.h"
 #include <map>
-#include <vector>
 #include <optional>
 #include <string>
 #include <iterator>
@@ -12,7 +11,6 @@
 
 class ScalarResults : public IScalarResultReceiver {
 public:
-    ~ScalarResults();
     std::optional<ScalarResult> operator[](const std::string& tradeId) const;
 
     bool containsTrade(const std::string& tradeId) const;
@@ -32,7 +30,6 @@ public:
         using result_it = std::map<std::string, double>::const_iterator;
         using error_it = std::map<std::string, std::string>::const_iterator;
 
-        Iterator() = default;
         Iterator(result_it res_start, result_it res_finish, error_it err_start, error_it err_finish);
 
         // Iterator must be constructable from ScalarResults parent

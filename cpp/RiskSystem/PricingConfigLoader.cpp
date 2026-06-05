@@ -1,7 +1,10 @@
 #include "PricingConfigLoader.h"
+#include "PricingEngineConfig.h"
+#include "PricingEngineConfigItem.h"
 #include <stdexcept>
 #include <pugixml.hpp>
 #include <format>
+#include <string>
 
 std::string PricingConfigLoader::getConfigFile() const {
     return configFile_;

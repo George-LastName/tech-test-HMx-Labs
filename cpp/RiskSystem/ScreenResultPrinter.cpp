@@ -1,5 +1,8 @@
 #include "ScreenResultPrinter.h"
+#include "../Models/ScalarResults.h"
 #include <iostream>
+#include <string>
+#include <optional>
 
 void ScreenResultPrinter::printResults(ScalarResults& results) {
     for (const auto& result : results) {

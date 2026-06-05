@@ -12,7 +12,7 @@
 class BasePricingEngine : public IPricingEngine {
 private:
     std::map<std::string, unsigned int> supportedTypes_;
-    int delay_;
+    int delay_ = 5000;
     
     class Random {
     public:
@@ -31,7 +31,7 @@ private:
     static std::map<std::string, std::string>& getTradesToWarn();
 
 protected:
-    BasePricingEngine();
+    BasePricingEngine() = default;
     ~BasePricingEngine() override = default;
 
     void price(ITrade* trade, IScalarResultReceiver* resultReceiver) override;

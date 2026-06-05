@@ -10,8 +10,8 @@
 #else
 #include <termios.h>
 #include <unistd.h>
-#include <fcntl.h>
-
+#include <cstdio>
+// NOLINTNEXTLINE
 int _getch() {
     struct termios oldt, newt;
     int ch;

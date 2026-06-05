@@ -4,6 +4,7 @@
 #include "../Pricers/CorpBondPricingEngine.h"
 #include "../Pricers/FxPricingEngine.h"
 #include "PricingConfigLoader.h"
+#include "PricingEngineConfig.h"
 
 #include <iostream>
 #include <memory>
