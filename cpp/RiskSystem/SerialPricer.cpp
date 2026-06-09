@@ -6,6 +6,7 @@
 
 #include <vector>
 #include <string>
+#include <map>
 
 
 void SerialPricer::price(const std::vector<TradeList>& tradeContainers,

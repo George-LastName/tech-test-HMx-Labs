@@ -1,5 +1,6 @@
 #include "ScreenResultPrinter.h"
 #include "../Models/ScalarResults.h"
+#include "../Models/ScalarResult.h"
 #include <iostream>
 #include <string>
 #include <optional>

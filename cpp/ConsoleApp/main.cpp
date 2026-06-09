@@ -1,9 +1,11 @@
+#include "../Models/ScalarResults.h"
+#include "../Models/TradeList.h"
 #include "../RiskSystem/SerialTradeLoader.h"
 #include "../RiskSystem/StreamingTradeLoader.h"
-#include "../Models/ScalarResults.h"
 #include "../RiskSystem/ParallelPricer.h"
 #include "../RiskSystem/ScreenResultPrinter.h"
 #include <iostream>
+#include <vector>
 
 #ifdef _WIN32
 #include <conio.h>
@@ -34,7 +36,7 @@ int main() {
 
     SerialTradeLoader tradeLoader;
     std::cout << "Serial Loader Start\n";
-    auto allTrades = tradeLoader.loadTrades();
+    std::vector<TradeList> allTrades = tradeLoader.loadTrades();
 
     ScalarResults parallelResults;
     ParallelPricer parallelPricer;

@@ -2,15 +2,19 @@
 
 #include "../Models/ITrade.h"
 #include "../Models/IScalarResultReceiver.h"
+#include "../Pricers/IPricingEngine.h"
+#include "Loaders/ITradeLoader.h"
 
 #include <stdexcept>
 #include <fstream>
 #include <memory>
 #include <string>
+#include <map>
+#include <vector>
 
 void StreamingTradeLoader::loadAndPrice(IScalarResultReceiver* resultReceiver) {
     loadPricers();
-    auto loaders = getTradeLoaders();
+    std::vector<std::unique_ptr<ITradeLoader>> loaders = getTradeLoaders();
 
     for (auto& loader : loaders){
         std::string filename = loader->getDataFile();

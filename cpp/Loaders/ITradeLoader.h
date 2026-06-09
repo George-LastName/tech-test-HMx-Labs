@@ -1,10 +1,10 @@
 #ifndef ITRADELOADER_H
 #define ITRADELOADER_H
 #include "../Models/TradeList.h"
+#include "../Models/ITrade.h"
 #include <vector>
 #include <string>
 #include <utility>
-class ITrade; // Forward Declare when using only pointer or reference.
 
 class ITradeLoader {
 protected:

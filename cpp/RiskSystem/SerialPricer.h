@@ -1,12 +1,9 @@
 #ifndef SERIALPRICER_H
 #define SERIALPRICER_H
 
-#include "../Pricers/IPricingEngine.h"
 #include "../Models/TradeList.h"
 #include "../Models/IScalarResultReceiver.h"
 #include "BasePricer.h"
-#include "PricingConfigLoader.h"
-
 #include <vector>
 
 class SerialPricer : BasePricer {

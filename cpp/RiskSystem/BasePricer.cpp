@@ -5,6 +5,7 @@
 #include "../Pricers/FxPricingEngine.h"
 #include "PricingConfigLoader.h"
 #include "PricingEngineConfig.h"
+#include "PricingEngineConfigItem.h"
 
 #include <iostream>
 #include <memory>

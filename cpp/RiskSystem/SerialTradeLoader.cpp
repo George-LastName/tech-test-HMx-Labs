@@ -1,8 +1,10 @@
 #include "SerialTradeLoader.h"
 
 #include "../Models/TradeList.h"
-
+#include "../Loaders/ITradeLoader.h"
 #include <vector>
+#include <memory>
+
 
 std::vector<TradeList> SerialTradeLoader::loadTrades() {
     auto loaders = getTradeLoaders();
