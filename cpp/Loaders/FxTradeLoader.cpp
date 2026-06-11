@@ -9,6 +9,7 @@
 #include <chrono>
 #include <string>
 #include <vector>
+#include <utility>
 
 FxTrade* FxTradeLoader::createTradeFromLine(std::string line) {
     auto items = splitLine(std::move(line));
