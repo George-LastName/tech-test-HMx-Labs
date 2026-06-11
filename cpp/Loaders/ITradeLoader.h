@@ -17,8 +17,7 @@ public:
     std::vector<std::string> splitLine(std::string line);
 
     virtual ~ITradeLoader() = default;
-    virtual void loadTradesFromFile(std::string filename, TradeList& tradeList) = 0;
-
+    virtual void loadTradesFromFile(TradeList& tradeList) = 0;
     virtual ITrade* createTradeFromLine(std::string line) = 0;
 
     virtual std::string getDataFile() const {return dataFile_;}

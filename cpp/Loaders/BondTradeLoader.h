@@ -9,7 +9,7 @@
 class BondTradeLoader : public ITradeLoader {
 private:
     BondTrade* createTradeFromLine(std::string line) override;
-    void loadTradesFromFile(std::string filename, TradeList& tradeList) override;
+    void loadTradesFromFile(TradeList& tradeList) override;
 public:
     BondTradeLoader(std::string dataFile) : ITradeLoader(std::move(dataFile), ",") {}
 };

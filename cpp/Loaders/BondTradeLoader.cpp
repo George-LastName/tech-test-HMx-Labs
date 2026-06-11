@@ -11,7 +11,7 @@
 #include <vector>
 
 BondTrade* BondTradeLoader::createTradeFromLine(std::string line) {
-    auto items = splitLine(line);
+    auto items = splitLine(std::move(line));
 
     if (items.size() < 7) {
         throw std::runtime_error("Invalid line format");
@@ -32,14 +32,14 @@ BondTrade* BondTradeLoader::createTradeFromLine(std::string line) {
     return trade;
 }
 
-void BondTradeLoader::loadTradesFromFile(std::string filename, TradeList& tradeList) {
-    if (filename.empty()) {
+void BondTradeLoader::loadTradesFromFile(TradeList& tradeList) {
+    if (dataFile_.empty()) {
         throw std::invalid_argument("Filename cannot be null");
     }
     
-    std::ifstream stream(filename);
+    std::ifstream stream(dataFile_);
     if (!stream.is_open()) {
-        throw std::runtime_error("Cannot open file: " + filename);
+        throw std::runtime_error("Cannot open file: " + dataFile_);
     }
     
     int lineCount = 0;

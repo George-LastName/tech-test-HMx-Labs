@@ -11,7 +11,7 @@
 
 TradeList ITradeLoader::loadTrades() {
     TradeList tradeList;
-    loadTradesFromFile(dataFile_, tradeList);
+    loadTradesFromFile(tradeList);
     return tradeList;
 }
 
